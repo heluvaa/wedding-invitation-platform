@@ -1,0 +1,30 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Undangkan Aja — Platform Undangan Digital",
+  description: "Buat undangan pernikahan digital yang elegan dalam hitungan menit. Pilih tema, isi data, bagikan ke tamu via WhatsApp.",
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html
+      lang="id"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased light`}
+      style={{ colorScheme: 'light' }}
+    >
+      <body className="min-h-full flex flex-col bg-white text-gray-900">{children}</body>
+    </html>
+  );
+}

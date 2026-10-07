@@ -93,8 +93,13 @@ export default function NewInvitationPage() {
                 </div>
               )}
               
-              <div className="mb-4 h-48 rounded bg-gradient-to-br from-rose-100 to-pink-100 flex items-center justify-center">
-                <span className="text-gray-400 text-sm">Preview</span>
+              <div className="mb-4 h-48 rounded overflow-hidden bg-stone-100">
+                <img
+                  src={template.thumbnail}
+                  alt={`Preview template ${template.name}`}
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
               </div>
               
               <h3 className="text-lg font-semibold text-gray-900">

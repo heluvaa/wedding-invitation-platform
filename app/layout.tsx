@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const accent = Cormorant_Garamond({
+  variable: "--font-accent",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
+const body = Jost({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -21,10 +30,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased light`}
+      className={`${display.variable} ${accent.variable} ${body.variable} h-full antialiased light`}
       style={{ colorScheme: 'light' }}
     >
-      <body className="min-h-full flex flex-col bg-white text-gray-900">{children}</body>
+      <body className="font-body min-h-full flex flex-col bg-[#FDF9F3] text-stone-800">{children}</body>
     </html>
   );
 }

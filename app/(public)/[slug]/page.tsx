@@ -10,6 +10,7 @@ import { FloralGardenTemplate } from '@/components/templates/FloralGardenTemplat
 import { RusticWoodTemplate } from '@/components/templates/RusticWoodTemplate'
 import { IslamiTemplate } from '@/components/templates/IslamiTemplate'
 import { JawaTemplate } from '@/components/templates/JawaTemplate'
+import { ShareWhatsApp } from '@/components/invitations/ShareWhatsApp'
 
 // Halaman undangan dirender per request (data DB dinamis, bukan prerender).
 export const instant = false
@@ -78,5 +79,15 @@ export default async function InvitationPage({ params }: Props) {
   adminDb().rpc('increment_invitation_views', { invitation_id: inv.id }).then(() => {}, () => {})
 
   const Template = TEMPLATES[inv.template_id] ?? ClassicTemplate
-  return <Template invitation={inv} />
+  const base = process.env.NEXT_PUBLIC_APP_URL || 'https://wedding-invitation-platform-heluvaa.vercel.app'
+  const url = `${base}/${inv.slug}`
+  const title = `${inv.bride_name} & ${inv.groom_name}`
+  return (
+    <>
+      <Template invitation={inv} />
+      <div className="fixed bottom-4 left-0 right-0 z-[60] flex justify-center px-4">
+        <ShareWhatsApp url={url} title={title} />
+      </div>
+    </>
+  )
 }

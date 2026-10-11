@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { PublicInvitationCreate } from '@/components/invitations/PublicInvitationCreate'
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function BuatPage() {
-  return <PublicInvitationCreate />
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-[#FDF9F3]" />}>
+      <PublicInvitationCreate />
+    </Suspense>
+  )
 }

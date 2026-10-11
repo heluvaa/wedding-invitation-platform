@@ -53,6 +53,10 @@ function Shell({ children }: { children: React.ReactNode }) {
     <main className="min-h-screen bg-[#FDF9F3] px-5 py-12">
       <div className="mx-auto max-w-2xl">
         <h1 className="font-display text-3xl text-stone-900">Edit undangan</h1>
+        <p className="mt-2 text-sm text-stone-600">
+          Ubah data di bawah, lalu tekan <b>Simpan perubahan</b>. Link undangan yang sudah dibagikan
+          ke tamu akan langsung menampilkan data terbaru. Tidak perlu kirim ulang.
+        </p>
         <div className="mt-8">{children}</div>
       </div>
     </main>

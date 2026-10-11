@@ -8,48 +8,56 @@ const HERO_IMG = U('1519741497674-611481863552', 1000)
 
 const templates = [
   {
+    id: 'elegant-simple',
     name: 'Elegant Simple',
     desc: 'Minimalis elegan dengan aksen rose yang lembut',
     img: U('1520854221256-17451cc331bf', 600),
     tier: 'Gratis',
   },
   {
+    id: 'classic',
     name: 'Classic Rose',
     desc: 'Klasik romantis dengan nuansa rose yang hangat',
     img: U('1511285560929-80b456fea0bc', 600),
     tier: 'Gratis',
   },
   {
+    id: 'floral',
     name: 'Floral Garden',
     desc: 'Romantis dengan nuansa bunga pastel yang manis',
     img: U('1469259943454-aa100abba749', 600),
     tier: 'Gratis',
   },
   {
+    id: 'modern',
     name: 'Modern Minimalis',
     desc: 'Bersih dan kekinian dengan tipografi tegas',
     img: U('1465495976277-4387d4b0b4c6', 600),
     tier: 'Premium',
   },
   {
+    id: 'elegant',
     name: 'Luxury Gold',
     desc: 'Mewah dengan tema gelap dan aksen emas',
     img: U('1522673607200-164d1b6ce486', 600),
     tier: 'Premium',
   },
   {
+    id: 'rustic',
     name: 'Rustic Wood',
     desc: 'Hangat natural dengan sentuhan pedesaan',
     img: U('1500382017468-9049fed747ef', 600),
     tier: 'Premium',
   },
   {
+    id: 'islami',
     name: 'Sakral Islami',
     desc: 'Hijau-putih elegan bernuansa islami',
     img: U('1519817650390-64a93db51149', 600),
     tier: 'Premium',
   },
   {
+    id: 'jawa',
     name: 'Adat Jawa',
     desc: 'Merah-emas tradisional yang agung',
     img: U('1519167758481-83f550bb49b3', 600),
@@ -125,25 +133,30 @@ const features = [
 const faqs = [
   {
     q: 'Apakah bisa coba gratis dulu?',
-    a: 'Bisa. Semua 8 tema bisa dicoba gratis, dan undangan dibuat tanpa daftar akun.',
+    a: 'Gratis. Semua 8 tema bisa dipakai tanpa bayar dan tanpa daftar akun.',
   },
   {
-    q: 'Bagaimana cara pembayarannya?',
-    a: 'Via QRIS atau DANA. Setelah pembayaran terkonfirmasi, undanganmu langsung aktif dan siap dibagikan.',
+    q: 'Apakah ada biaya?',
+    a: 'Tidak ada biaya. Membuat dan membagikan undangan sepenuhnya gratis.',
   },
   {
     q: 'Berapa lama proses pembuatannya?',
     a: 'Isi formulir, pilih tema, undangan langsung jadi dalam hitungan menit. Tidak perlu menunggu desainer.',
   },
   {
-    q: 'Apakah bisa revisi setelah jadi?',
-    a: 'Undangan bisa diubah kapan saja lewat link edit rahasia yang kamu simpan.',
+    q: 'Apakah bisa diubah setelah dibagikan?',
+    a: 'Bisa. Ubah lewat link edit rahasia yang kamu simpan. Link undangan yang sudah dikirim ke tamu ikut menampilkan data terbaru.',
   },
   {
     q: 'Apakah tamu perlu install aplikasi?',
     a: 'Tidak. Undangan terbuka langsung di browser HP — tinggal ketuk link yang kamu bagikan via WhatsApp.',
   },
+  {
+    q: 'Bagaimana kalau link edit hilang?',
+    a: 'Link edit tidak bisa dipulihkan. Simpan link itu sejak awal, karena hanya link itu yang bisa mengubah undangan.',
+  },
 ]
+
 
 function Divider() {
   return (
@@ -157,7 +170,7 @@ function Divider() {
 
 // Paket berbayar & testimoni dimatikan. Testimoni sebelumnya tanpa bukti (karangan).
 const SHOW_PRICING = false
-const SHOW_TESTIMONI = false
+const SHOW_TESTIMONI = true
 
 export default function HomePage() {
   return (
@@ -313,7 +326,7 @@ export default function HomePage() {
                   <h3 className="font-display text-xl text-stone-900">{t.name}</h3>
                   <p className="text-sm text-stone-500 mt-1.5 leading-relaxed flex-1">{t.desc}</p>
                   <Link
-                    href="/buat"
+                    href={`/buat?tema=${t.id}`}
                     className="w-link-underline self-start mt-4 text-sm font-medium text-amber-800"
                   >
                     Gunakan tema ini →

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type FormEvent } from 'react'
+import { ShareWhatsApp } from '@/components/invitations/ShareWhatsApp'
 
 export const TEMPLATE_OPTIONS = [
   { id: 'elegant-simple', name: 'Elegant Simple' },
@@ -128,10 +129,18 @@ export default function InvitationForm({ mode, initial, editToken, invitationId,
     return (
       <div className="space-y-5 rounded-2xl border border-amber-200 bg-white p-6">
         <h2 className="font-display text-2xl text-stone-900">Undangan siap dibagikan</h2>
+        <ol className="list-decimal space-y-1 pl-5 text-sm text-stone-700">
+          <li>Tekan tombol hijau <b>Bagikan ke WhatsApp</b> untuk mengirim link ke tamu.</li>
+          <li>Simpan <b>link edit rahasia</b> di bawah. Lewat link itu kamu bisa mengubah undangan kapan saja.</li>
+          <li>Jangan bagikan link edit ke tamu. Hanya link undangan yang dikirim ke tamu.</li>
+        </ol>
         <div>
           <p className={label}>Link undangan (bagikan ke tamu)</p>
           <input readOnly className={field} value={done.url} onFocus={(e) => e.target.select()} />
           <a href={done.url} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-amber-800 underline">Buka undangan</a>
+        </div>
+        <div>
+          <ShareWhatsApp url={done.url} title="Mohon doa restu dan kehadirannya." />
         </div>
         <div>
           <p className={label}>Link edit rahasia (simpan, hanya ini yang bisa mengubah undangan)</p>

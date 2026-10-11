@@ -47,7 +47,7 @@ export interface Database {
       invitations: {
         Row: {
           id: string
-          user_id: string
+          user_id: string | null
           slug: string
           template_id: string
           bride_name: string
@@ -66,10 +66,13 @@ export interface Database {
           published_at: string | null
           created_at: string
           updated_at: string
+          maps_url: string | null
+          gallery_images: string[]
+          view_count: number
         }
         Insert: {
           id?: string
-          user_id: string
+          user_id?: string | null
           slug: string
           template_id: string
           bride_name: string
@@ -88,10 +91,13 @@ export interface Database {
           published_at?: string | null
           created_at?: string
           updated_at?: string
+          maps_url?: string | null
+          gallery_images?: string[]
+          view_count?: number
         }
         Update: {
           id?: string
-          user_id?: string
+          user_id?: string | null
           slug?: string
           template_id?: string
           bride_name?: string
@@ -110,6 +116,40 @@ export interface Database {
           published_at?: string | null
           created_at?: string
           updated_at?: string
+          maps_url?: string | null
+          gallery_images?: string[]
+          view_count?: number
+        }
+      }
+      invitation_secrets: {
+        Row: {
+          invitation_id: string
+          edit_token_hash: string
+        }
+        Insert: {
+          invitation_id: string
+          edit_token_hash: string
+        }
+        Update: {
+          invitation_id?: string
+          edit_token_hash?: string
+        }
+      }
+      rate_limits: {
+        Row: {
+          key: string
+          count: number
+          window_start: string
+        }
+        Insert: {
+          key: string
+          count: number
+          window_start: string
+        }
+        Update: {
+          key?: string
+          count?: number
+          window_start?: string
         }
       }
       guests: {

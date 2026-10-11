@@ -125,7 +125,7 @@ const features = [
 const faqs = [
   {
     q: 'Apakah bisa coba gratis dulu?',
-    a: 'Bisa. Paket Basic Rp50.000 sudah termasuk 1 tema undangan, RSVP online, dan amplop digital. Kamu juga bisa melihat semua contoh tema sebelum memutuskan.',
+    a: 'Bisa. Semua 8 tema bisa dicoba gratis, dan undangan dibuat tanpa daftar akun.',
   },
   {
     q: 'Bagaimana cara pembayarannya?',
@@ -137,7 +137,7 @@ const faqs = [
   },
   {
     q: 'Apakah bisa revisi setelah jadi?',
-    a: 'Bisa. Paket Basic 1x revisi, Premium 3x revisi, Eksklusif revisi sampai kamu puas.',
+    a: 'Undangan bisa diubah kapan saja lewat link edit rahasia yang kamu simpan.',
   },
   {
     q: 'Apakah tamu perlu install aplikasi?',
@@ -155,6 +155,10 @@ function Divider() {
   )
 }
 
+// Paket berbayar & testimoni dimatikan. Testimoni sebelumnya tanpa bukti (karangan).
+const SHOW_PRICING = false
+const SHOW_TESTIMONI = false
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#FDF9F3] text-stone-800 overflow-x-clip">
@@ -166,13 +170,7 @@ export default function HomePage() {
           </Link>
           <div className="flex items-center gap-2 sm:gap-4">
             <Link
-              href="/login"
-              className="w-link-underline px-3 py-2 text-amber-900 font-medium text-sm sm:text-base"
-            >
-              Masuk
-            </Link>
-            <Link
-              href="/register"
+              href="/buat"
               className="px-5 sm:px-6 py-2.5 bg-amber-800 text-white rounded-full font-medium text-sm sm:text-base hover:bg-amber-900 transition-colors duration-300 shadow-md shadow-amber-900/10"
             >
               Buat Undangan
@@ -207,7 +205,7 @@ export default function HomePage() {
             </p>
             <div className="w-hero-fade w-hero-fade-3 flex flex-col sm:flex-row gap-4 mt-9">
               <Link
-                href="/register"
+                href="/buat"
                 className="px-8 py-4 bg-amber-800 text-white rounded-full font-medium text-center hover:bg-amber-900 transition-all duration-300 shadow-xl shadow-amber-900/20 hover:shadow-amber-900/30 hover:-translate-y-0.5"
               >
                 Buat Undangan Gratis
@@ -315,7 +313,7 @@ export default function HomePage() {
                   <h3 className="font-display text-xl text-stone-900">{t.name}</h3>
                   <p className="text-sm text-stone-500 mt-1.5 leading-relaxed flex-1">{t.desc}</p>
                   <Link
-                    href="/register"
+                    href="/buat"
                     className="w-link-underline self-start mt-4 text-sm font-medium text-amber-800"
                   >
                     Gunakan tema ini →
@@ -371,7 +369,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== Harga ===== */}
+      {SHOW_PRICING && (
       <section className="bg-white border-b border-amber-100/70">
         <div className="mx-auto max-w-5xl px-5 py-20 md:py-24">
           <Reveal className="text-center">
@@ -414,7 +412,7 @@ export default function HomePage() {
                     ))}
                   </ul>
                   <Link
-                    href="/register"
+                    href="/buat"
                     className={`block text-center py-3.5 rounded-full font-medium transition-all duration-300 ${
                       p.hot
                         ? 'bg-amber-700 text-white hover:bg-amber-600 shadow-lg shadow-amber-900/30'
@@ -430,7 +428,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== Testimoni ===== */}
+      )}
+
+      {SHOW_TESTIMONI && (
       <section className="mx-auto max-w-6xl px-5 py-20 md:py-24">
         <Reveal className="text-center">
           <p className="font-accent italic text-amber-700 text-lg">Cerita bahagia</p>
@@ -457,6 +457,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      )}
 
       {/* ===== FAQ ===== */}
       <section className="bg-white border-y border-amber-100/70">
@@ -506,7 +507,7 @@ export default function HomePage() {
             Gabung dengan ratusan pasangan yang mempercayakan momen spesialnya kepada kami.
           </p>
           <Link
-            href="/register"
+            href="/buat"
             className="inline-block mt-9 px-10 py-4 bg-amber-700 text-white rounded-full font-medium text-lg hover:bg-amber-600 transition-all duration-300 shadow-2xl shadow-amber-900/40 hover:-translate-y-0.5"
           >
             Buat Undangan Sekarang
@@ -520,8 +521,8 @@ export default function HomePage() {
           <p className="font-display text-2xl text-amber-100">Undangkan Aja</p>
           <div className="flex gap-8 text-sm">
             <Link href="#tema" className="w-link-underline hover:text-amber-200 transition-colors">Tema</Link>
-            <Link href="/login" className="w-link-underline hover:text-amber-200 transition-colors">Masuk</Link>
-            <Link href="/register" className="w-link-underline hover:text-amber-200 transition-colors">Daftar</Link>
+            
+            
           </div>
           <p className="text-xs text-stone-500">&copy; 2026 Undangkan Aja. Seluruh hak cipta dilindungi.</p>
         </div>

@@ -63,6 +63,34 @@ const templates = [
     img: U('1519167758481-83f550bb49b3', 600),
     tier: 'Premium',
   },
+  {
+    id: 'tropis',
+    name: 'Tropis Botanik',
+    desc: 'Hijau tua dan krem dengan nuansa pernikahan outdoor',
+    img: U('1518709268805-4e9042af9f23', 600),
+    tier: 'Premium',
+  },
+  {
+    id: 'malam',
+    name: 'Malam Berbintang',
+    desc: 'Navy dan emas pucat untuk resepsi malam',
+    img: U('1519741497674-611481863552', 600),
+    tier: 'Premium',
+  },
+  {
+    id: 'polaroid',
+    name: 'Vintage Polaroid',
+    desc: 'Krem hangat dengan nuansa nostalgia',
+    img: U('1511285560929-80b456fea0bc', 600),
+    tier: 'Premium',
+  },
+  {
+    id: 'mono',
+    name: 'Minimal Monokrom',
+    desc: 'Hitam putih tegas dengan tipografi editorial',
+    img: U('1515886657613-9f3515b0c78f', 600),
+    tier: 'Premium',
+  },
 ]
 
 const gallery = [

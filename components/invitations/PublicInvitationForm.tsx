@@ -12,6 +12,10 @@ export const TEMPLATE_OPTIONS = [
   { id: 'rustic', name: 'Rustic Wood' },
   { id: 'islami', name: 'Sakral Islami' },
   { id: 'jawa', name: 'Adat Jawa' },
+  { id: 'tropis', name: 'Tropis Botanik' },
+  { id: 'malam', name: 'Malam Berbintang' },
+  { id: 'polaroid', name: 'Vintage Polaroid' },
+  { id: 'mono', name: 'Minimal Monokrom' },
 ]
 
 export interface InvitationFormValues {
@@ -26,6 +30,8 @@ export interface InvitationFormValues {
   custom_message: string
   cover_image_url: string
   gallery_text: string // satu URL per baris
+  music_url: string // URL file audio (mp3)
+  bank_text: string // satu rekening per baris: Bank|NoRek|AtasNama
 }
 
 export const EMPTY_VALUES: InvitationFormValues = {
@@ -40,6 +46,8 @@ export const EMPTY_VALUES: InvitationFormValues = {
   custom_message: '',
   cover_image_url: '',
   gallery_text: '',
+  music_url: '',
+  bank_text: '',
 }
 
 // Helper untuk mengubah ISO dari server jadi nilai datetime-local (waktu lokal).
@@ -63,6 +71,11 @@ function toPayload(v: InvitationFormValues) {
     custom_message: v.custom_message,
     cover_image_url: v.cover_image_url,
     gallery_images: v.gallery_text.split('\n').map((s) => s.trim()).filter(Boolean),
+    music_url: v.music_url,
+    bank_accounts: v.bank_text.split('\n').map((s) => s.trim()).filter(Boolean).map((line) => {
+      const [bank = '', noRek = '', atasNama = ''] = line.split('|').map((x) => x.trim())
+      return { bank, noRek, atasNama }
+    }),
   }
 }
 
@@ -212,6 +225,18 @@ export default function InvitationForm({ mode, initial, editToken, invitationId,
       <div>
         <label className={label} htmlFor="gallery">Galeri foto (URL gambar, satu per baris, maks 12)</label>
         <textarea id="gallery" rows={4} className={field} value={v.gallery_text} onChange={set('gallery_text')} />
+      </div>
+
+      <div>
+        <label className={label} htmlFor="music">Musik latar (URL file mp3, opsional)</label>
+        <input id="music" className={field} placeholder="https://...mp3" value={v.music_url} onChange={set('music_url')} />
+        <p className="mt-1 text-xs text-stone-500">Tamu bisa memutar/menjeda musik dari tombol di pojok halaman undangan.</p>
+      </div>
+
+      <div>
+        <label className={label} htmlFor="bank">Amplop digital (opsional, satu per baris)</label>
+        <textarea id="bank" rows={3} className={field} placeholder={'BCA|1234567890|Nama Pemilik\nDANA|081234567890|Nama Pemilik'} value={v.bank_text} onChange={set('bank_text')} />
+        <p className="mt-1 text-xs text-stone-500">Format: Bank|NomorRekening|AtasNama. Maksimal 5 baris.</p>
       </div>
 
       {error && <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</p>}

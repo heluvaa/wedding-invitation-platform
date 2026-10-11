@@ -54,6 +54,8 @@ export async function PUT(req: NextRequest, ctx: { params: Promise<{ id: string 
       custom_message: input.custom_message || null,
       cover_image_url: input.cover_image_url || null,
       gallery_images: input.gallery_images,
+      music_url: input.music_url || null,
+      bank_accounts: input.bank_accounts,
       updated_at: new Date().toISOString(),
     })
     .eq('id', id)
@@ -71,7 +73,7 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ id: string 
   }
   const { data, error } = await adminDb()
     .from('invitations')
-    .select('id, slug, template_id, bride_name, groom_name, event_date, event_location, event_address, maps_url, story_text, custom_message, cover_image_url, gallery_images')
+    .select('id, slug, template_id, bride_name, groom_name, event_date, event_location, event_address, maps_url, story_text, custom_message, cover_image_url, gallery_images, music_url, bank_accounts')
     .eq('id', id)
     .single()
   if (error || !data) return json({ error: 'Undangan tidak ditemukan' }, 404)

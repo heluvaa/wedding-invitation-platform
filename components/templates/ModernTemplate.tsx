@@ -1,5 +1,7 @@
 'use client'
 
+import { Guestbook } from './ThemeKit'
+
 import { useEffect, useState } from 'react'
 import { TemplateProps } from '@/lib/templates/types'
 import { formatEventDate } from '@/lib/utils/invitation'
@@ -174,7 +176,10 @@ export function ModernTemplate({ invitation, guest, isPreview }: TemplateProps) 
           </p>
           <p className="mt-8 text-xs text-stone-400">Dibuat dengan ♥ di Undangkan Aja</p>
         </Reveal>
-      </footer>
+            <section className="px-6 py-20">
+        <Guestbook invitationId={invitation.id} p={{ bg: '#ffffff', ink: '#1c1917', soft: '#57534e', accent: '#1c1917', card: '#f5f5f4', line: '#d6d3d1', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
+      </section>
+</footer>
     </div>
   )
 }

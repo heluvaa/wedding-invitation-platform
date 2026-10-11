@@ -57,6 +57,8 @@ export async function POST(req: NextRequest) {
       custom_message: input.custom_message || null,
       cover_image_url: input.cover_image_url || null,
       gallery_images: input.gallery_images,
+      music_url: input.music_url || null,
+      bank_accounts: input.bank_accounts,
       published: true,
       published_at: new Date().toISOString(),
     })

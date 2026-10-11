@@ -11,6 +11,7 @@ import { RusticWoodTemplate } from '@/components/templates/RusticWoodTemplate'
 import { IslamiTemplate } from '@/components/templates/IslamiTemplate'
 import { JawaTemplate } from '@/components/templates/JawaTemplate'
 import { ShareWhatsApp } from '@/components/invitations/ShareWhatsApp'
+import { TropisTemplate, MalamTemplate, PolaroidTemplate, MonoTemplate } from '@/components/templates/NewThemes'
 
 // Halaman undangan dirender per request (data DB dinamis, bukan prerender).
 export const instant = false
@@ -28,6 +29,10 @@ const TEMPLATES: Record<string, React.ComponentType<any>> = {
   rustic: RusticWoodTemplate,
   islami: IslamiTemplate,
   jawa: JawaTemplate,
+  tropis: TropisTemplate,
+  malam: MalamTemplate,
+  polaroid: PolaroidTemplate,
+  mono: MonoTemplate,
 }
 
 async function loadPublished(slug: string) {

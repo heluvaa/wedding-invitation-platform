@@ -33,6 +33,9 @@ export function PublicInvitationEdit({ invitationId }: { invitationId: string })
           custom_message: data.custom_message ?? '',
           cover_image_url: data.cover_image_url ?? '',
           gallery_text: (data.gallery_images ?? []).join('\n'),
+          music_url: data.music_url ?? '',
+          bank_text: ((data.bank_accounts ?? []) as { bank: string; noRek: string; atasNama: string }[])
+            .map((a) => `${a.bank}|${a.noRek}|${a.atasNama}`).join('\n'),
         })
       })
       .catch((e) => setError(e instanceof Error ? e.message : 'Gagal memuat'))

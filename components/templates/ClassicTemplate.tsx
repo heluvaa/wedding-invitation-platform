@@ -1,3 +1,6 @@
+'use client'
+
+import { Guestbook } from './ThemeKit'
 import type { Invitation } from '@/lib/types/invitation'
 import { formatEventDate } from '@/lib/utils/invitation'
 import Image from 'next/image'
@@ -117,41 +120,9 @@ export function ClassicTemplate({ invitation }: ClassicTemplateProps) {
         </section>
       )}
       
-      {/* RSVP Section */}
+      {/* Konfirmasi & ucapan (tersimpan ke database) */}
       <section className="px-4 py-16">
-        <div className="mx-auto max-w-md text-center">
-          <h2 className="font-serif text-3xl font-bold text-gray-900">
-            Konfirmasi Kehadiran
-          </h2>
-          
-          <form className="mt-8 space-y-4">
-            <input
-              type="text"
-              placeholder="Nama Anda"
-              className="w-full rounded-lg border px-4 py-3"
-              required
-            />
-            
-            <select className="w-full rounded-lg border px-4 py-3" required>
-              <option value="">Pilih Kehadiran</option>
-              <option value="hadir">Hadir</option>
-              <option value="tidak-hadir">Tidak Hadir</option>
-            </select>
-            
-            <textarea
-              placeholder="Ucapan & Doa (opsional)"
-              rows={4}
-              className="w-full rounded-lg border px-4 py-3"
-            />
-            
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-rose-600 px-6 py-3 text-white hover:bg-rose-700"
-            >
-              Kirim Konfirmasi
-            </button>
-          </form>
-        </div>
+        <Guestbook invitationId={invitation.id} p={{ bg: '#ffffff', ink: '#111827', soft: '#4b5563', accent: '#e11d48', card: '#f9fafb', line: '#e5e7eb', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
       </section>
     </div>
   )

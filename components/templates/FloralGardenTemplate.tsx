@@ -3,6 +3,7 @@
 import { TemplateProps } from '@/lib/templates/types'
 import { formatEventDate } from '@/lib/utils/invitation'
 import { Reveal } from './Reveal'
+import { MusicToggle, Guestbook } from './ThemeKit'
 import { useCountdown } from './useCountdown'
 import './wedding.css'
 
@@ -19,6 +20,7 @@ export function FloralGardenTemplate({ invitation, guest, isPreview }: TemplateP
 
   return (
     <div className="w-font-body min-h-screen bg-[#fdf6f4] text-stone-800">
+    <MusicToggle src={invitation.music_url ?? ''} p={{ bg: '#fdf6f4', ink: '#292524', soft: '#78716c', accent: '#e11d48', card: '#ffffff', line: '#fecdd3', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
       {invitation.user?.tier === 'free' && !isPreview && (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/90 py-2 text-center text-xs text-rose-700 backdrop-blur-sm">
           Dibuat dengan ♥ di <span className="font-semibold">Undangkan Aja</span>
@@ -138,7 +140,17 @@ export function FloralGardenTemplate({ invitation, guest, isPreview }: TemplateP
             kami sediakan dengan penuh syukur.
           </p>
           <div className="w-divider my-6"><span className="text-rose-400">❀</span></div>
-          <p className="text-stone-500 text-sm">Informasi rekening tersedia setelah konfirmasi kehadiran.</p>
+          {((invitation.bank_accounts as unknown as { bank: string; noRek: string; atasNama: string }[]) ?? []).length > 0 ? (
+            <div className="mt-6 space-y-3">
+              {((invitation.bank_accounts as unknown as { bank: string; noRek: string; atasNama: string }[]) ?? []).map((a) => (
+                <div key={a.noRek} className="rounded-xl border border-current/20 p-4">
+                  <p className="text-xs uppercase tracking-[0.25em] opacity-70">{a.bank}</p>
+                  <p className="mt-1 text-xl tabular-nums tracking-widest">{a.noRek}</p>
+                  <p className="mt-1 text-sm opacity-70">a.n. {a.atasNama}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </Reveal>
       </section>
 
@@ -151,7 +163,10 @@ export function FloralGardenTemplate({ invitation, guest, isPreview }: TemplateP
           <p className="w-font-accent italic text-rose-600 text-xl mt-8">{invitation.bride_name} &amp; {invitation.groom_name}</p>
           <p className="text-xs text-stone-400 mt-8">Dibuat dengan ♥ di Undangkan Aja</p>
         </Reveal>
-      </footer>
+            <section className="px-6 py-20">
+        <Guestbook invitationId={invitation.id} p={{ bg: '#fdf6f4', ink: '#292524', soft: '#78716c', accent: '#e11d48', card: '#ffffff', line: '#fecdd3', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
+      </section>
+</footer>
     </div>
   )
 }

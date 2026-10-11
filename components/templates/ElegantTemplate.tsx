@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { TemplateProps } from '@/lib/templates/types'
 import { formatEventDate } from '@/lib/utils/invitation'
 import { Reveal } from './Reveal'
+import { MusicToggle, Guestbook } from './ThemeKit'
 import './wedding.css'
 
 function useCountdown(target: string) {
@@ -37,6 +38,7 @@ export function ElegantTemplate({ invitation, guest, isPreview }: TemplateProps)
 
   return (
     <div className="w-font-body min-h-screen bg-[#141210] text-[#ece5d8]">
+    <MusicToggle src={invitation.music_url ?? ''} p={{ bg: '#141210', ink: '#ece5d8', soft: '#b8ab8e', accent: '#d4af37', card: '#1c1917', line: '#3a3228', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
       {/* Watermark free tier */}
       {invitation.user?.tier === 'free' && !isPreview && (
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 py-2 text-center text-xs text-[#d4af37] backdrop-blur-sm">
@@ -178,7 +180,17 @@ export function ElegantTemplate({ invitation, guest, isPreview }: TemplateProps)
             kami sediakan dengan penuh syukur.
           </p>
           <div className="w-divider my-6"><span className="text-[#d4af37] text-lg">✦</span></div>
-          <p className="text-[#b8ab8e] text-sm">Informasi rekening tersedia setelah konfirmasi kehadiran.</p>
+          {((invitation.bank_accounts as unknown as { bank: string; noRek: string; atasNama: string }[]) ?? []).length > 0 ? (
+            <div className="mt-6 space-y-3">
+              {((invitation.bank_accounts as unknown as { bank: string; noRek: string; atasNama: string }[]) ?? []).map((a) => (
+                <div key={a.noRek} className="rounded-xl border border-current/20 p-4">
+                  <p className="text-xs uppercase tracking-[0.25em] opacity-70">{a.bank}</p>
+                  <p className="mt-1 text-xl tabular-nums tracking-widest">{a.noRek}</p>
+                  <p className="mt-1 text-sm opacity-70">a.n. {a.atasNama}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </Reveal>
       </section>
 
@@ -194,7 +206,10 @@ export function ElegantTemplate({ invitation, guest, isPreview }: TemplateProps)
           </p>
           <p className="text-xs text-[#6b6259] mt-8">Dibuat dengan ♥ di Undangkan Aja</p>
         </Reveal>
-      </footer>
+            <section className="px-6 py-20">
+        <Guestbook invitationId={invitation.id} p={{ bg: '#141210', ink: '#ece5d8', soft: '#b8ab8e', accent: '#d4af37', card: '#1c1917', line: '#3a3228', btnInk: '#ffffff', display: '', accentFont: '', body: '' }} />
+      </section>
+</footer>
     </div>
   )
 }
